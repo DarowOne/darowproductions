@@ -772,10 +772,10 @@ if (window.innerWidth <= 600) {
     carousels[id].index = maxIndex;
   }
 
-  const slideWidth = slides[0].offsetWidth;
+  const slideWidth = carousel.offsetWidth / visible;
 
-  track.style.transform =
-    `translateX(-${carousels[id].index * slideWidth}px)`;
+track.style.transform =
+  `translateX(-${carousels[id].index * slideWidth}px)`;
 }
 
 
