@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:image" content="https://darowone.github.io/Portfolio/images/hambur.png">
+
+
+  <title>Dario Almonacid | Fotografía Gastronómica</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    
+
+    
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: #ff6f61;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ffa08a;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: white;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(18,18,18,0.75);
+    }
+
+    header * {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .btn-contact {
+      background-color: #ff6f61;
+      color: white;
+      padding: 15px 40px;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(255,111,97,0.6);
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-contact:hover {
+      background-color: #ffa08a;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 60px auto 100px;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    /* ABOUT */
+    .about {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      color: #ff6f61;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #ddd;
+    }
+
+    /* SERVICES */
+    .services {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .service {
+      background: #1e1e1e;
+      padding: 25px;
+      border-radius: 12px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-8px);
+    }
+
+    .service h3 {
+      color: #ff6f61;
+      margin-bottom: 15px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      break-inside: avoid;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    /* LIGHTBOX */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox img {
+  max-width: 70%;
+  max-height: 70vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+
+    /* TESTIMONIALS */
+.testimonials {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2.3rem;
+  color: #ff6f61;
+  margin-bottom: 40px;
+}
+
+.testimonial-slider {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  display: none;
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  align-items: center;
+  gap: 30px;
+}
+
+.testimonial.active {
+  display: flex;
+}
+
+.testimonial-left {
+  text-align: center;
+  min-width: 160px;
+}
+
+.testimonial-left img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.testimonial-left a {
+  font-weight: 600;
+  display: block;
+}
+
+.testimonial-right {
+  text-align: left;
+  font-size: 1.05rem;
+  color: #ddd;
+  line-height: 1.7;
+}
+
+/* dots */
+.testimonial-dots {
+  margin-top: 25px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #444;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #ff6f61;
+}
+
+/* responsive */
+@media (max-width: 700px) {
+  .testimonial {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .testimonial-right {
+    text-align: center;
+  }
+}
+
+
+    /* FOOTER */
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    footer a {
+      color: #ff6f61;
+      margin: 0 8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .gallery { column-count: 2; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1.1rem; }
+      .gallery { column-count: 1; }
+    }
+
+    /* NUEVO PORTFOLIO SERVICIOS */
+
+.portfolio-servicios {
+  margin-top: 80px;
+}
+
+.servicio-card {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.servicio-card:hover {
+  transform: translateY(-6px);
+  background: #222;
+}
+
+.servicio-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.servicio-img img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.servicio-info {
+  padding: 40px;
+  flex: 1;
+}
+
+.servicio-info h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.servicio-info p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+/* desplegable */
+
+.contenido-desplegable {
+  display: none;
+  margin-bottom: 40px;
+}
+
+.contenido-desplegable.active {
+  display: block;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 40px 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s ease;
+}
+
+.carousel-track img {
+  width: calc(33.333% - 14px); /* 3 visibles con gap */
+  aspect-ratio: 4 / 3;        /* proporción natural */
+  object-fit: cover;          /* recorta sin deformar */
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .carousel-track img {
+    width: 50%;
+    height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-track img {
+    width: 100%;
+    height: 260px;
+  }
+}
+
+/* FLECHAS */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  font-size: 28px;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+.arrow:hover {
+  background: rgba(255,111,97,0.8);
+}
+
+.arrow.left {
+  left: 20px;
+}
+
+.arrow.right {
+  right: 20px;
+}
+
+/* MODAL 360 */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal iframe {
+  width: 90%;
+  height: 90%;
+  border-radius: 12px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 25px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .servicio-card {
+    flex-direction: column;
+  }
+
+  .servicio-card.reverse {
+    flex-direction: column;
+  }
+
+  .servicio-img img {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+
+  </style>
+
+
+</head>
+
+<body>
+
+<header>
+  <h1>Dario Almonacid</h1>
+  <p>Fotografía profesional para tu negocio</p>
+  <a href="https://wa.me/542974349847" class="btn-contact" target="_blank">
+    Contactame por WhatsApp
+  </a>
+</header>
+
+<main>
+
+  <section class="about">
+    <h2>Sobre mí</h2>
+    <p>
+Soy fotógrafo profesional con experiencia en distintos ámbitos.<br>
+Entiendo que cada cliente tiene una necesidad concreta que resolver.<br>
+
+Mi trabajo no es solo hacer fotos atractivas, sino crear imágenes que comuniquen mejor,
+fortalezcan la identidad y ayuden a posicionar el proyecto de forma profesional.
+</p>
+  </section>
+
+  <section class="services">
+    <div class="service">
+      <h3>Fotografía para restaurantes</h3>
+      <p>Imágenes que resaltan tu menú y atraen más clientes.</p>
+    </div>
+    <div class="service">
+      <h3>Contenido para redes</h3>
+      <p>Fotos pensadas para vender en Instagram.</p>
+    </div>
+    <div class="service">
+      <h3>Campañas publicitarias</h3>
+      <p>Producción visual profesional.</p>
+    </div>
+  </section>
+
+  <section class="portfolio-servicios">
+
+  <!-- GASTRONOMIA -->
+  <div class="servicio-card" onclick="toggleServicio('galeria1')">
+    <div class="servicio-img">
+      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80">
+    </div>
+    <div class="servicio-info">
+      <h2>Gastronomía</h2>
+      <p>Fotografía profesional para restaurantes y marcas gastronómicas. Imágenes pensadas para vender y generar deseo.</p>
+    </div>
+  </div>
+
+  <div id="galeria1" class="contenido-desplegable">
+  <div class="carousel" data-carousel="1">
+    <button class="arrow left" onclick="moveSlide(1,-1)">❮</button>
+    <div class="carousel-track">
+      <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1555992336-03a23c6e7a0b?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80">
+    </div>
+    <button class="arrow right" onclick="moveSlide(1,1)">❯</button>
+  </div>
+</div>
+
+
+  <!-- ALOJAMIENTOS -->
+  <div class="servicio-card reverse" onclick="toggleServicio('galeria2')">
+    <div class="servicio-img">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80">
+    </div>
+    <div class="servicio-info">
+      <h2>Alojamientos</h2>
+      <p>Producción visual para hoteles, Airbnb y espacios turísticos. Mostrá tu lugar con una estética premium.</p>
+    </div>
+  </div>
+
+ <div id="galeria2" class="contenido-desplegable">
+  <div class="carousel" data-carousel="2">
+    <button class="arrow left" onclick="moveSlide(2,-1)">❮</button>
+    <div class="carousel-track">
+      <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2b28?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210b9?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1560448075-bb485b067938?auto=format&fit=crop&w=1200&q=80">
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80">
+    </div>
+    <button class="arrow right" onclick="moveSlide(2,1)">❯</button>
+  </div>
+</div>
+
+
+  <!-- 360 -->
+  <div class="servicio-card" onclick="openKuula()">
+    <div class="servicio-img">
+      <img src="https://images.unsplash.com/photo-1505842465776-3bfd188b3a1f?auto=format&fit=crop&w=1200&q=80">
+    </div>
+    <div class="servicio-info">
+      <h2>Fotografía 360°</h2>
+      <p>Recorridos inmersivos interactivos para mostrar espacios de forma innovadora.</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- MODAL KUULA -->
+<div id="kuulaModal" class="modal">
+  <span class="close" onclick="closeKuula()">×</span>
+  <iframe width="100%" height="100%" frameborder="0"
+    allow="xr-spatial-tracking; gyroscope; accelerometer"
+    allowfullscreen
+    scrolling="no"
+    src="https://kuula.co/share/collection/7M03P?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1">
+  </iframe>
+</div>
+
+
+
+  <section class="testimonials">
+  <h2>Lo que dicen mis clientes</h2>
+
+  <div class="testimonial-slider">
+
+    <div class="testimonial active">
+      <div class="testimonial-left">
+        <img src="images/okura.jpg" alt="Okura Restaurant">
+        <a href="https://instagram.com/" target="_blank">Okura</a>
+      </div>
+      <div class="testimonial-right">
+        “Las fotos elevaron completamente nuestra imagen. El trabajo fue profesional,
+        rápido y superó nuestras expectativas.”
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-left">
+        <img src="images/leyseca.jpg" alt="Ley Seca Bar">
+        <a href="https://instagram.com/" target="_blank">Ley Seca</a>
+      </div>
+      <div class="testimonial-right">
+        “Logró capturar la esencia del bar y transmitirla en cada imagen.
+        Ideal para redes y comunicación.”
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-left">
+        <img src="images/carne.jpg" alt="Parrilla Artesanal">
+        <a href="https://instagram.com/beehapi.cl" target="_blank">Beehapi</a>
+      </div>
+      <div class="testimonial-right">
+        “Las fotos generaron más interacción y consultas desde el primer día.
+        Un trabajo impecable.”
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-left">
+        <img src="https://darowone.github.io/Portfolio/img_inicio/02_restaurant7.jpg" alt="Molle Verde">
+        <a href="https://instagram.com/" target="_blank">Molle Verde</a>
+      </div>
+      <div class="testimonial-right">
+        “Excelente ojo para el detalle. Las imágenes transmiten sabor y calidad.”
+      </div>
+    </div>
+
+  </div>
+
+  <div class="testimonial-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <p>© 2026 · Dario Almonacid</p>
+  <p>
+    <a href="https://wa.me/542974349847" target="_blank">WhatsApp</a> ·
+    <a href="https://www.instagram.com/darow.foodhospitality" target="_blank">Instagram</a>
+  </p>
+</footer>
+
+
+
+<script>
+
+/* =========================
+   DESPLEGAR SERVICIOS
+========================= */
+
+function toggleServicio(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const isActive = el.classList.contains("active");
+
+  document.querySelectorAll(".contenido-desplegable")
+    .forEach(e => e.classList.remove("active"));
+
+  if (!isActive) {
+    el.classList.add("active");
+  }
+}
+
+
+/* =========================
+   MODAL KUULA 360
+========================= */
+
+function openKuula() {
+  document.getElementById("kuulaModal").style.display = "flex";
+}
+
+function closeKuula() {
+  document.getElementById("kuulaModal").style.display = "none";
+}
+
+
+/* =========================
+   CARRUSEL
+========================= */
+
+let carousels = {
+  1: { index: 0 },
+  2: { index: 0 }
+};
+
+function moveSlide(id, direction) {
+
+  const carousel = document.querySelector(`.carousel[data-carousel="${id}"]`);
+  if (!carousel) return;
+
+  const track = carousel.querySelector(".carousel-track");
+  if (!track) return;
+
+  const slides = track.querySelectorAll("img");
+  if (slides.length === 0) return;
+
+  const visible = 3;
+  const maxIndex = slides.length - visible;
+
+  if (!carousels[id]) {
+    carousels[id] = { index: 0 };
+  }
+
+  carousels[id].index += direction;
+
+  if (carousels[id].index > maxIndex) {
+    carousels[id].index = 0;
+  }
+
+  if (carousels[id].index < 0) {
+    carousels[id].index = maxIndex;
+  }
+
+  const slideWidth = slides[0].offsetWidth;
+
+  track.style.transform =
+    `translateX(-${carousels[id].index * slideWidth}px)`;
+}
+
+
+/* =========================
+   AUTO SLIDE SOLO SI ESTA ABIERTO
+========================= */
+
+setInterval(() => {
+  if (document.getElementById("galeria1").classList.contains("active")) {
+    moveSlide(1, 1);
+  }
+  if (document.getElementById("galeria2").classList.contains("active")) {
+    moveSlide(2, 1);
+  }
+}, 3000);
+
+
+/* =========================
+   TESTIMONIALS
+========================= */
+
+const testimonials = document.querySelectorAll('.testimonial');
+const dots = document.querySelectorAll('.dot');
+let current = 0;
+
+function showTestimonial(index) {
+  testimonials.forEach(t => t.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+
+  testimonials[index].classList.add('active');
+  dots[index].classList.add('active');
+}
+
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    current = index;
+    showTestimonial(current);
+  });
+});
+
+setInterval(() => {
+  current = (current + 1) % testimonials.length;
+  showTestimonial(current);
+}, 6000);
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.carousel-track img').forEach(img => {
+    img.addEventListener('click', function(e) {
+      e.stopPropagation();
+      lightboxImg.src = this.src;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', function() {
+    lightbox.classList.remove('active');
+  });
+
+});
+</script>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" src="">
+</div>
+
+
+</body>
+</html>
