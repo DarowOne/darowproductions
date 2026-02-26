@@ -313,13 +313,24 @@
 
 .servicio-card {
   display: flex;
-  align-items: center;
+  align-items: stretch;   /* ← CAMBIO CLAVE */
   background: #1a1a1a;
   border-radius: 20px;
   margin-bottom: 25px;
   overflow: hidden;
   cursor: pointer;
   transition: 0.3s ease;
+}
+
+.servicio-img {
+  display: flex;
+}
+
+.servicio-img img {
+  width: 400px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .servicio-card:hover {
