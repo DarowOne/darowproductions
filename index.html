@@ -502,6 +502,12 @@
   }
 }
 
+    @media (max-width: 768px) {
+  .servicio-card {
+    cursor: default;
+  }
+}
+
 
   </style>
 
@@ -722,6 +728,10 @@ fortalezcan la identidad y ayuden a posicionar el proyecto de forma profesional.
 ========================= */
 
 function toggleServicio(id) {
+
+  // 👉 En mobile no hacer nada (queda siempre abierto)
+  if (window.innerWidth <= 768) return;
+
   const el = document.getElementById(id);
   if (!el) return;
 
@@ -860,6 +870,27 @@ document.addEventListener("DOMContentLoaded", function() {
   lightbox.addEventListener('click', function() {
     lightbox.classList.remove('active');
   });
+
+});
+</script>
+
+/* =========================
+   ACTIVO MOBILE SLIDE
+========================= */
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  function activarGaleriasMobile() {
+    if (window.innerWidth <= 768) {
+      document.getElementById("galeria1").classList.add("active");
+      document.getElementById("galeria2").classList.add("active");
+    }
+  }
+
+  activarGaleriasMobile();
+
+  // por si rotan el celular
+  window.addEventListener("resize", activarGaleriasMobile);
 
 });
 </script>
