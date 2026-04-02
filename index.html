@@ -429,6 +429,12 @@
     height: 260px;
   }
 }
+/* FLECHAS  desactivadas mobile */
+@media (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
 
 /* FLECHAS */
 
@@ -857,7 +863,11 @@ if (window.innerWidth <= 600) {
     carousels[id].index = maxIndex;
   }
 
-  const slideWidth = carousel.offsetWidth / visible;
+  const slide = track.querySelector("img");
+const style = window.getComputedStyle(track);
+const gap = parseInt(style.gap) || 0;
+
+const slideWidth = slide.offsetWidth + gap;
 
 track.style.transform =
   `translateX(-${carousels[id].index * slideWidth}px)`;
